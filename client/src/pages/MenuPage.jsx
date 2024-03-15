@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react'
-import axios from 'axios'
+// import axios from 'axios'
 import { Link } from 'react-router-dom'
 import MenuItem from "./MenuItem.jsx"
 
@@ -7,17 +7,21 @@ const Menu = () => {
     const [items, setItems] = useState([])
 
     useEffect(() => {
-      const fetchAllItems = async () => {
+      async function fetchMenuItems() {
         try{
-          const res = await axios.get("http://localhost:8000/menu")
-          setItems(res.data)
-          console.log(res.data)
+          // const res = await axios.get("http://localhost:8000/menu")
+          const response = await fetch("http://localhost:8000/menu")
+          const meals = await response.json();
+          // setItems(res.data)
+          // console.log(res.data)
+          setItems(meals);
+          console.log(meals);
         }catch(err){
           console.log(err)
         }
       }
   
-      fetchAllItems()
+      fetchMenuItems();
     }, [])
   
     return (
