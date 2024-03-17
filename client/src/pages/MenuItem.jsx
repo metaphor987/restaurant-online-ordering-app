@@ -16,11 +16,9 @@ export default function MenuItem({id, name, desc, price, quantity}){
     }
     const url = `/item/:${id}`
     
-    
     return (
         <div>
           <h2>{name}</h2>
-          {/* <Link to={url} state={{id: id}}>{name}</Link> */}
           <Link to={url} state={{id: id}}>{name}</Link>
           <p>{desc}</p>
           <p>${price}</p>

@@ -7,12 +7,12 @@ export async function addItemToCart(id, quantity){
             'Content-Type': 'application/json'
         }
     })
-    console.log("after PUT method")
+    console.log("after POST method")
     const resData = await response.json();
 
     if (!response.ok){
         throw new Error("Failed to add new item to the cart.")
     }
-    console.log(resData)
+    console.log("resData", resData)
     // return resData.message;
 }

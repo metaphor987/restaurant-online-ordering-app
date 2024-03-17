@@ -54,19 +54,64 @@ app.post("/books", (req, res) => {
     })
 })
 
+// this part works but don't merge data for same itemId together
+// app.post('/addToCart', (req, res) => {
+//     const item = req.body.item;
+
+//     const q = "INSERT INTO Cart (`itemId`, `quantity`) VALUES (?)"
+//     const values = [
+//         req.body.id,
+//         req.body.quantity,
+//     ]
+
+//     db.query(q, [values], (err, data) =>{
+//         if (err) return res.json(err)
+//         return res.status(200).json({message: 'New item has been added to the cart!'})
+//     })
+// })
+
 app.post('/addToCart', (req, res) => {
-    const item = req.body.item;
+    // console.log("app.post start")
+    const itemId = req.body.id;
+    const q = `SELECT * FROM Cart WHERE itemId = ${itemId}` 
+    // console.log(q)
 
-    const q = "INSERT INTO Cart (`itemId`, `quantity`) VALUES (?)"
-    const values = [
-        req.body.id,
-        req.body.quantity,
-    ]
+    db.query(q, [[itemId]], (err, data) => {
+        if (err){
+            console.log("Error executing SELECT query", err);
+            return res.json(err)
+        }
+        console.log("res.length", res.length)
+        console.log("data.length", data.length)
 
-    db.query(q, [values], (err, data) =>{
-        if (err) return res.json(err)
-        return res.status(200).json({message: 'New item has been added to the cart!'})
+        if (data.length > 0){
+            const queryUpdate = `UPDATE Cart SET quantity = quantity + 1 WHERE itemId = ${itemId}`
+            
+            db.query(queryUpdate, [[itemId]], (err,data) => {
+                if (err){
+                    console.log("Error executing UPDATE query", err);
+                    return res.json(err)
+                }
+                console.log('Quantity updated successfully');
+            })
+        } else{
+            const queryInsert = "INSERT INTO Cart (`itemId`, `quantity`) VALUES (?)"
+            const values = [itemId, 1]
+
+            // console.log(queryInsert)
+            db.query(queryInsert, [values], (err, data) => {
+                if (err){
+                    console.log("Error executing INSERT query", err);
+                    return res.json(err)
+                }
+                console.log("New item inserted successfully")
+            })
+        }
     })
+})
+
+app.get('/details/:id', (req, res) => {
+
 })
 
 app.listen(8000, ()=>{

@@ -1,7 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Add from "./pages/Add";
-import Books from "./pages/Books";
-import Update from "./pages/Update.jsx";
 import Menu from "./pages/MenuPage.jsx";
 import Cart from "./pages/Cart.jsx";
 import ItemPage from "./pages/ItemPage.jsx"
