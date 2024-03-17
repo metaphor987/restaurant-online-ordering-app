@@ -54,6 +54,21 @@ app.post("/books", (req, res) => {
     })
 })
 
+app.post('/addToCart', (req, res) => {
+    const item = req.body.item;
+
+    const q = "INSERT INTO Cart (`itemId`, `quantity`) VALUES (?)"
+    const values = [
+        req.body.id,
+        req.body.quantity,
+    ]
+
+    db.query(q, [values], (err, data) =>{
+        if (err) return res.json(err)
+        return res.status(200).json({message: 'New item has been added to the cart!'})
+    })
+})
+
 app.listen(8000, ()=>{
     console.log("Connected to Backend!2")
 })
