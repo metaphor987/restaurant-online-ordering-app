@@ -20,7 +20,8 @@ export default function MenuItem({id, name, desc, price, quantity}){
     return (
         <div>
           <h2>{name}</h2>
-          <Link to={url} state={{from: {id}}}>{name}</Link>
+          {/* <Link to={url} state={{id: id}}>{name}</Link> */}
+          <Link to={url} state={{id: id}}>{name}</Link>
           <p>{desc}</p>
           <p>${price}</p>
           <p>{quantity}</p>
