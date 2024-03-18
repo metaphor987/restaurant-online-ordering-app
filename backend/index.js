@@ -70,9 +70,10 @@ app.post("/books", (req, res) => {
 //     })
 // })
 
-app.post('/addToCart', (req, res) => {
+app.post('/updateCart', (req, res) => {
     // console.log("app.post start")
     const itemId = req.body.id;
+    const quantityChange = req.body.quantity;
     const q = `SELECT * FROM Cart WHERE itemId = ${itemId}` 
     // console.log(q)
 
@@ -85,7 +86,7 @@ app.post('/addToCart', (req, res) => {
         console.log("data.length", data.length)
 
         if (data.length > 0){
-            const queryUpdate = `UPDATE Cart SET quantity = quantity + 1 WHERE itemId = ${itemId}`
+            const queryUpdate = `UPDATE Cart SET quantity = quantity + ${quantityChange} WHERE itemId = ${itemId}`
             
             db.query(queryUpdate, [[itemId]], (err,data) => {
                 if (err){

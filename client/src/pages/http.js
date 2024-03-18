@@ -1,6 +1,6 @@
-export async function addItemToCart(id, quantity){
-    console.log("function addItemToCart before. id: ", id)
-    const response = await fetch('http://localhost:8000/addToCart', {
+export async function updateCart(id, quantity){
+    console.log("function updateCart before. id: ", id)
+    const response = await fetch('http://localhost:8000/updateCart', {
         method: 'POST',
         body: JSON.stringify({id: id, quantity: quantity}),
         headers: {
@@ -11,7 +11,7 @@ export async function addItemToCart(id, quantity){
     const resData = await response.json();
 
     if (!response.ok){
-        throw new Error("Failed to add new item to the cart.")
+        throw new Error("Failed to update item to the cart.")
     }
     console.log("resData", resData)
     // return resData.message;
