@@ -9,12 +9,8 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route path="/menu" element={<Menu/>}/>
+          <Route path="/" element={<Menu/>}/>
           <Route path="/item/:id" element={<ItemPage />} />
-          {/* <Route path="/cart" element={<Cart/>}/> */}
-          {/* <Route path="/" element={<Books/>}/> */}
-          {/* <Route path="/add" element={<Add/>}/> */}
-          {/* <Route path="/update/:id" element={<Update />} /> */}
         </Routes>
       </BrowserRouter>
     </div>

@@ -20,10 +20,6 @@ app.use(express.json())
 app.use(cors())
 
 app.get("/", (req, res) => {
-    res.json("Hello, this is the Backend!2")
-})
-
-app.get("/menu", (req, res) => {
     const q = "SELECT * FROM Items"
     db.query(q, (err, data) => {
         if (err) return res.json(err)
@@ -31,8 +27,8 @@ app.get("/menu", (req, res) => {
     })
 })
 
-app.get("/books", (req, res) => {
-    const q = "SELECT * FROM books"
+app.get("/cart", (req, res) => {
+    const q = "SELECT * FROM Cart"
     db.query(q, (err, data) => {
         if (err) return res.json(err)
         return res.json(data)

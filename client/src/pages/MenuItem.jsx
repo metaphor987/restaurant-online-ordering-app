@@ -1,9 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {Link} from "react-router-dom";
 import { updateCart } from "./http";
 
-export default function MenuItem({id, name, desc, price, quantity}){
-    const [num, setNum] = useState(0)
+export default function MenuItem({id, name, desc, price, quantity, cartQuantity}){
+    console.log("Item!", cartQuantity)
+    const [num, setNum] = useState(cartQuantity)
+
+    useEffect(() => {
+        function getCartQuantity(){
+            setNum(cartQuantity)
+        }
+        getCartQuantity()
+    }, [cartQuantity])
+
     const numIncrement = () => {
         setNum(num + 1)
         console.log("functionMenuItem id: ", id)
@@ -24,7 +33,7 @@ export default function MenuItem({id, name, desc, price, quantity}){
           <p>{desc}</p>
           <p>${price}</p>
           <p>{quantity}</p>
-          <p>number: {num}</p>
+          <p>cart number: {num}</p>
           <button onClick={numDecrement}>Decrement</button>
           <button onClick={numIncrement}>Increment</button>
         </div>
