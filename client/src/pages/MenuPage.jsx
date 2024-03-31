@@ -47,9 +47,10 @@ const Menu = () => {
   
     return (
       <div>
-        <h1>
-          Menu
-        </h1>
+        <h1>Menu</h1>
+        <p>Are you the Restaurant Admin?</p>
+        <button><Link to="/admin">Admin</Link></button>
+        <button><Link to="/cart">Cart</Link></button>
         <div className="items">
           {items.map(item => (
             <MenuItem 
@@ -58,7 +59,6 @@ const Menu = () => {
               {...item}/>
           ))}
         </div>
-        <button><Link to="/cart">Cart</Link></button>
       </div>
     )
 }

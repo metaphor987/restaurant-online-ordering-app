@@ -1,7 +1,7 @@
 import {useEffect} from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, Link } from 'react-router-dom';
 
-export default function ItemPage(props){
+export default function ItemPage(){
     // const [details, setDetails] = useState([])
 
     // useEffect(() => {
@@ -19,12 +19,15 @@ export default function ItemPage(props){
     // }, [])
 
     const {state} = useLocation()
-    const id = state.id
     console.log("state", state)
 
     return (
         <div>
-            <h1>Item Page {id}</h1>
+            <h1>Item Page {state.id}</h1>
+            <h2>{state.name}</h2>
+            <p>{state.desc}</p>
+            <p>${state.price}</p>
+            <Link to="/">Back</Link>
         </div>
     );
 }

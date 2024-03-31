@@ -107,6 +107,37 @@ app.post('/updateCart', (req, res) => {
     })
 })
 
+app.post('/updateMeal', (req, res) => {
+    const id = req.body.id;
+    const name = req.body.name;
+    const desc = req.body.desc;
+    const price = req.body.price;
+    const quantity = req.body.quantity;
+    const q = `SELECT * FROM Items WHERE id = ${id}` 
+
+    db.query(q, [[id]], (err, data) => {
+        if (err){
+            console.log("Error executing SELECT query", err);
+            return res.json(err)
+        }
+        console.log("res.length", res.length)
+        console.log("data.length", data.length)
+
+        if (data.length > 0){
+            const queryUpdate = `UPDATE \`Restaurant\`.\`Items\` SET \`name\` = '${name}', \`desc\` = '${desc}', \`price\` = '${price}', \`quantity\` = '${quantity}' WHERE (\`id\` = ${id})`
+            // UPDATE `Restaurant`.`Items` SET `name` = 'pretzel bites (update from mysql)' WHERE (`id` = '2');
+
+            db.query(queryUpdate, [[id]], (err,data) => {
+                if (err){
+                    console.log("Error executing UPDATE query", err);
+                    return res.json(err)
+                }
+                console.log('Menu Item updated successfully');
+            })
+        }
+    })
+})
+
 app.get('/details/:id', (req, res) => {
 
 })
